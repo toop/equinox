@@ -27,7 +27,11 @@ class hr_contract_cn(osv.osv):
 
     _columns = {
         'social_insurance_amount': fields.float('社保基数', digits_compute=dp.get_precision('Payroll')),
-        'pit_exemption_amount': fields.float('个税起征点', digits_compute=dp.get_precision('Payroll')),
+        'pit_exemption_amount': fields.float('个税起征点', required=True, digits_compute=dp.get_precision('Payroll')),
+    }
+
+    _defaults = {
+        'pit_exemption_amount': 3500.00,
     }
     
 hr_contract_cn()
