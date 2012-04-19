@@ -45,7 +45,7 @@ Chinese Payroll Rules
     ],
     'data':[
      'l10n_cn_hr_payroll_view.xml',
-     #'l10n_cn_hr_payroll_data.xml',
+     'l10n_cn_hr_payroll_data.xml',
      #'data/hr.salary.rule.csv',
     ],
     'installable': True
