@@ -13,9 +13,14 @@
         <field name="code">COMP</field>
     </record>
 
+    <record id="hr_payroll.BT" model="hr.salary.rule.category">
+        <field name="name">税前收入</field>
+        <field name="code">BT</field>
+    </record>
+
     <!-- 薪酬规则 -->
 
-    <record id="hr_payroll_rules_pit" model="hr.salary.rule">
+    <record id="hr_payroll_rules_bt" model="hr.salary.rule">
         <field name="category_id" ref="hr_payroll.BT"/>
         <field name="name">税前收入</field>
         <field name="code">BT</field>
@@ -44,21 +49,94 @@
         <field name="code">PIT1</field>
         <field name="sequence">110</field>
         <field name="appears_on_payslip" eval="True"/>
-        <field name="condition_select">python</field>
-        <field name="condition_python">BT - contract.pit_exemption_amount></field>
+        <field name="condition_select">range</field>
+        <field name="condition_range">BT - contract.pit_exemption_amount</field>
+        <field name="condition_range_min">0</field>
+        <field name="condition_range_max">1500.00</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">result = -((BT - contract.pit_exemption_amount) * 0.03)</field>
     </record>
-
-    <record id="hr_payroll_rules_insurance" model="hr.salary.rule">
-        <field name="category_id" ref="hr_payroll.DED"/>
-        <field name="name">Insurance</field>
-        <field name="code">Ins</field>
+    <record id="hr_payroll_rules_pit2" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.PIT"/>
+        <field name="parent_rule_id" ref="hr_payroll_rules_pit"/>
+        <field name="name">个人所得税</field>
+        <field name="code">PIT2</field>
+        <field name="sequence">120</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">range</field>
+        <field name="condition_range">BT - contract.pit_exemption_amount</field>
+        <field name="condition_range_min">1500</field>
+        <field name="condition_range_max">4500.00</field>
         <field name="amount_select">code</field>
-        <field name="sequence">165</field>
+        <field name="amount_python_compute">result = -((BT - contract.pit_exemption_amount) * 0.10 - 105.00)</field>
+    </record>
+    <record id="hr_payroll_rules_pit3" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.PIT"/>
+        <field name="parent_rule_id" ref="hr_payroll_rules_pit"/>
+        <field name="name">个人所得税</field>
+        <field name="code">PIT3</field>
+        <field name="sequence">130</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">range</field>
+        <field name="condition_range">BT - contract.pit_exemption_amount</field>
+        <field name="condition_range_min">4500</field>
+        <field name="condition_range_max">9000.00</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = -((BT - contract.pit_exemption_amount) * 0.20 - 555.00)</field>
+    </record>
+    <record id="hr_payroll_rules_pit4" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.PIT"/>
+        <field name="parent_rule_id" ref="hr_payroll_rules_pit"/>
+        <field name="name">个人所得税</field>
+        <field name="code">PIT4</field>
+        <field name="sequence">140</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">range</field>
+        <field name="condition_range">BT - contract.pit_exemption_amount</field>
+        <field name="condition_range_min">9000.00</field>
+        <field name="condition_range_max">35000.00</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = -((BT - contract.pit_exemption_amount) * 0.25 - 1005.00)</field>
+    </record>
+    <record id="hr_payroll_rules_pit5" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.PIT"/>
+        <field name="parent_rule_id" ref="hr_payroll_rules_pit"/>
+        <field name="name">个人所得税</field>
+        <field name="code">PIT5</field>
+        <field name="sequence">150</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">range</field>
+        <field name="condition_range">BT - contract.pit_exemption_amount</field>
+        <field name="condition_range_min">35000.00</field>
+        <field name="condition_range_max">55000.00</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = -((BT - contract.pit_exemption_amount) * 0.30 - 2755.00)</field>
+    </record>
+    <record id="hr_payroll_rules_pit6" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.PIT"/>
+        <field name="parent_rule_id" ref="hr_payroll_rules_pit"/>
+        <field name="name">个人所得税</field>
+        <field name="code">PIT6</field>
+        <field name="sequence">160</field>
+        <field name="appears_on_payslip" eval="True"/>
+        <field name="condition_select">range</field>
+        <field name="condition_range">BT - contract.pit_exemption_amount</field>
+        <field name="condition_range_min">55000.00</field>
+        <field name="condition_range_max">80000.00</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = -((BT - contract.pit_exemption_amount) * 0.35 - 5505.00)</field>
+    </record>
+    <record id="hr_payroll_rules_pit7" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.PIT"/>
+        <field name="parent_rule_id" ref="hr_payroll_rules_pit"/>
+        <field name="name">个人所得税</field>
+        <field name="code">PIT7</field>
+        <field name="sequence">170</field>
+        <field name="appears_on_payslip" eval="True"/>
         <field name="condition_select">python</field>
-        <field name="condition_python">result = bool(contract.insurance_employee_deduction)</field>
-        <field name="amount_python_compute">result = -contract.insurance_employee_deduction</field>
+        <field name="condition_python">result = (BT - contract.pit_exemption_amount) > 80000.00</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = -((BT - contract.pit_exemption_amount) * 0.35 - 13505.00)</field>
     </record>
 
     <!-- 薪酬结构 -->
@@ -66,7 +144,7 @@
     <record id="hr_payroll_salary_structure_employee" model="hr.payroll.structure">
         <field name="code">NEP01</field>
         <field name="name">中国法定薪酬（含公积金）</field>
-        <field eval="[(6, 0, [ref('hr_payroll_rules_insurance'))])]" name="rule_ids"/>
+        <field eval="[(6, 0, [ref('hr_payroll_rules_bt'),ref('hr_payroll_rules_pit'),])]" name="rule_ids"/>
         <field name="company_id" ref="base.main_company"/>    
         <field name="parent_id" ref="hr_payroll.structure_base"/>
     </record>
