@@ -21,9 +21,10 @@
 {
     'name': 'Chinese - Payroll',
     'category': 'Localization',
-    'author': 'Sandwych Consulting Limited',
+    'author': 'Kunming Sandwych Consulting Limited',
     'depends': ['hr_payroll'],
     'version': '1.0',
+    'version': 'www.sandwych.com',
     'description': """
 Chinese Payroll Rules
 =====================
